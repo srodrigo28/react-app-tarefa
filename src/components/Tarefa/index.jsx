@@ -6,11 +6,31 @@ export default class Tarefa extends Component{
     state = {
         novaTarefa: '',
         tarefas: [],
+        index: -1
     };
+
+    handleDelete = (e, index) => {
+        const { tarefas } = this.state;
+        const novasTarefas = [...tarefas];
+        novasTarefas.splice(index, 1);
+
+        this.setState({
+            tarefas: [...novasTarefas],
+        });
+    }
+    handleEdit = (e, index) => {
+       console.log('Index Edit: ' + index)
+       const { tarefas } = this.state;
+
+       this.setState({
+        index,
+        novaTarefa: tarefas[index],
+       })
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { tarefas } = this.state;
+        const { tarefas, index } = this.state;
         let { novaTarefa } = this.state;
         novaTarefa = novaTarefa.trim();
 
@@ -18,9 +38,19 @@ export default class Tarefa extends Component{
 
         const novasTarefas = [...tarefas];
 
-        this.setState({
-            tarefas: [...novasTarefas, novaTarefa],
-        });
+        if(index === -1){
+            this.setState({
+                tarefas: [...novasTarefas, novaTarefa],
+                novaTarefa: '',
+            });
+        } else {
+            novasTarefas[index] = novaTarefa;
+
+            this.setState({
+                tarefas: [ ...novasTarefas],
+                index: -1,
+            });
+        }
     }
 
     handleChange = (e) => {
@@ -43,18 +73,24 @@ export default class Tarefa extends Component{
                         value={novaTarefa}
                     />
                     <button 
-                        type='submit'> 
-                            <FaPlus />
-                        </button>
+                        type='submit'>
+                        <FaPlus />
+                    </button>
                 </form>
 
                 <ul className='tarefas'>
-                    {tarefas.map((tarefa) => (
+                    {tarefas.map((tarefa, index) => (
                         <li key={tarefa}>
                             {tarefa}
                             <div>
-                                <FaEdit className='edit'/>
-                                <FaTrash className='delete' />
+                                <FaEdit 
+                                    className='edit'
+                                    onClick={(e) => this.handleEdit(e, index)}    
+                                />
+                                <FaTrash 
+                                    className='delete' 
+                                    onClick={(e) => this.handleDelete(e, index)}
+                                />
                             </div>
                         </li>
                     ))}

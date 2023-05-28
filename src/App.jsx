@@ -1,5 +1,5 @@
 import './App.css'
-import { Tarefa } from './components/Tarefa'
+import Tarefa  from './components/Tarefa'
 
 function App() {
   return (
