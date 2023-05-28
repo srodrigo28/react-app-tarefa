@@ -8,7 +8,19 @@ export default class Tarefa extends Component{
         tarefas: [],
         index: -1
     };
+    componentDidMount(){
+        const tarefas = JSON.parse(localStorage.getItem('@aplication:  tarefas'));
+        if(!tarefas) return;
+        this.setState({ tarefas });
+    }
+    componentDidUpdate(prevProps, prevState){
+        const { tarefas } = this.state;
 
+        if(tarefas === prevState.tarefas) return;
+
+        localStorage.setItem('@aplication:  tarefas', JSON.stringify(tarefas));
+
+    }
     handleDelete = (e, index) => {
         const { tarefas } = this.state;
         const novasTarefas = [...tarefas];
@@ -24,10 +36,9 @@ export default class Tarefa extends Component{
 
        this.setState({
         index,
-        novaTarefa: tarefas[index],
+        novaTarefa: tarefas[index]
        })
     }
-
     handleSubmit = (e) => {
         e.preventDefault();
         const { tarefas, index } = this.state;
@@ -52,13 +63,11 @@ export default class Tarefa extends Component{
             });
         }
     }
-
     handleChange = (e) => {
         this.setState({
             novaTarefa: e.target.value,
         });
     }
-    
     render() {
         const { novaTarefa, tarefas } = this.state;
     
