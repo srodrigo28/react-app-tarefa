@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import './style.css'
-import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa'
+
+import Form from './../Form';
+import Tarefas from './../Tarefas';
 
 export default class Tarefa extends Component{
     state = {
@@ -59,7 +61,7 @@ export default class Tarefa extends Component{
 
             this.setState({
                 tarefas: [ ...novasTarefas],
-                index: -1,
+                index: -1
             });
         }
     }
@@ -75,35 +77,17 @@ export default class Tarefa extends Component{
             <div className="main">
                 <h1>Lista de Tarefa</h1>
 
-                <form onSubmit={this.handleSubmit} className="form">
-                    <input 
-                        onChange={this.handleChange} 
-                        type="text"
-                        value={novaTarefa}
-                    />
-                    <button 
-                        type='submit'>
-                        <FaPlus />
-                    </button>
-                </form>
+                <Form 
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    novaTarefa={this.novaTarefa}
+                />
 
-                <ul className='tarefas'>
-                    {tarefas.map((tarefa, index) => (
-                        <li key={tarefa}>
-                            {tarefa}
-                            <div>
-                                <FaEdit 
-                                    className='edit'
-                                    onClick={(e) => this.handleEdit(e, index)}    
-                                />
-                                <FaTrash 
-                                    className='delete' 
-                                    onClick={(e) => this.handleDelete(e, index)}
-                                />
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                <Tarefas
+                    tarefas={tarefas}
+                    handleEdit={this.handleEdit}
+                    handleDelete={this.handleDelete}
+                />
             </div>
         );       
     }

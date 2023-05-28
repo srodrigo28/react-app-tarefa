@@ -19,6 +19,11 @@
     ```
     npm i react-icons
     ```
+
+     * React Props-types
+    ```
+    npm i prop-types
+    ```
 ### Referencias
     * Curso Udemy Luiz Otávio Miranda
     * Titulo curso: Curso de JavaScript e TypeScript do básico ao avançado
