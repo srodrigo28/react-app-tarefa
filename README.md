@@ -14,6 +14,11 @@
     ```
     npm run dev
     ```
+### Dependências
+    * React-Icons
+    ```
+    npm i react-icons
+    ```
 ### Referencias
     * Curso Udemy Luiz Otávio Miranda
     * Titulo curso: Curso de JavaScript e TypeScript do básico ao avançado
