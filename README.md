@@ -25,3 +25,7 @@
     ```
     https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/learn/lecture/17170546#overview
     ```
+### Ultimo visto
+```
+https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/learn/lecture/17170800#overview
+```

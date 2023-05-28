@@ -1,40 +1,65 @@
-import { useState } from 'react';
+import { Component } from 'react';
 import './style.css'
 import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa'
 
-export function Tarefa(){
-    const tarefas = [
-        'lavar o carro',
-        'ir na feira',
-        'estudar codigos'
-    ];
+export default class Tarefa extends Component{
+    state = {
+        novaTarefa: '',
+        tarefas: [],
+    };
 
-    const [item, setItem] = useState("");
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { tarefas } = this.state;
+        let { novaTarefa } = this.state;
+        novaTarefa = novaTarefa.trim();
 
-    return(
-        <div className="main">
-            <h1>Lista de Tarefa</h1>
+        if(tarefas.indexOf(novaTarefa) !== -1) return;
 
-            <form action="#" className="form">
-                <span>{item}</span>
-                <input 
-                    type="text"
-                    value={setItem}
-                />
-                <button type='submit'> <FaPlus /></button>
-            </form>
+        const novasTarefas = [...tarefas];
 
-            <ul className='tarefas'>
-                {tarefas.map((tarefa) => (
-                    <li key={tarefa}>
-                        {tarefa}
-                        <div>
-                            <FaEdit className='edit'/>
-                            <FaTrash className='delete' />
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );       
+        this.setState({
+            tarefas: [...novasTarefas, novaTarefa],
+        });
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            novaTarefa: e.target.value,
+        });
+    }
+    
+    render() {
+        const { novaTarefa, tarefas } = this.state;
+    
+        return(
+            <div className="main">
+                <h1>Lista de Tarefa</h1>
+
+                <form onSubmit={this.handleSubmit} className="form">
+                    <input 
+                        onchange={this.handleChange} 
+                        type="text"
+                        value={novaTarefa}
+                    />
+                    <button 
+                        type='submit'> 
+                            <FaPlus />
+                        </button>
+                </form>
+
+                <ul className='tarefas'>
+                    {tarefas.map((tarefa) => (
+                        <li key={tarefa}>
+                            {tarefa}
+                            <div>
+                                <FaEdit className='edit'/>
+                                <FaTrash className='delete' />
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );       
+    };
 }
