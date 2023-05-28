@@ -38,7 +38,7 @@ export default class Tarefa extends Component{
 
                 <form onSubmit={this.handleSubmit} className="form">
                     <input 
-                        onchange={this.handleChange} 
+                        onChange={this.handleChange} 
                         type="text"
                         value={novaTarefa}
                     />
@@ -61,5 +61,5 @@ export default class Tarefa extends Component{
                 </ul>
             </div>
         );       
-    };
+    }
 }
